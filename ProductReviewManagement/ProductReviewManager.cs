@@ -39,6 +39,11 @@ namespace ProductReviewManagement
                 products.Add(new ProductReview() { ProductId = 9, UserId = 12, Review = "Good", Rating = 4.5, IsLike = true });
                 products.Add(new ProductReview() { ProductId = 5, UserId = 13, Review = "Average", Rating = 3.5, IsLike = false });
                 products.Add(new ProductReview() { ProductId = 10, UserId = 14, Review = "Average", Rating = 3, IsLike = false });
+                products.Add(new ProductReview() { ProductId = 6, UserId = 10, Review = "Good", Rating = 4.5, IsLike = true });
+                products.Add(new ProductReview() { ProductId = 8, UserId = 10, Review = "Average", Rating = 3, IsLike = false });
+                products.Add(new ProductReview() { ProductId = 9, UserId = 10, Review = "Good", Rating = 4.5, IsLike = true });
+                products.Add(new ProductReview() { ProductId = 5, UserId = 10, Review = "Average", Rating = 3.5, IsLike = false });
+                products.Add(new ProductReview() { ProductId = 10, UserId = 10, Review = "Average", Rating = 3, IsLike = false });
                 Console.WriteLine("Successfully Added The Products Review To The List");
             }
             catch (Exception ex)
@@ -250,6 +255,25 @@ namespace ProductReviewManagement
             else
             {
                 Console.WriteLine("No Products Review Added In The List");
+            }
+        }
+
+        //UC12 - Method to retreive records from datatable of particular user id order by rating
+        public static void GetRecordsBasedOnUserId(List<ProductReview> products, int userId)
+        {
+            if (products != null && userId < 12)
+            {
+                DataTable dataTable = CreateDataTableAndAddValues(products);
+                var resRows = (from table in dataTable.AsEnumerable() where table.Field<int>("UserId") == userId orderby table.Field<double>("Rating") select table).ToList();
+                Console.WriteLine($"ProductId \tUserId \t\tRating  \tReview    \tIsLike");
+                foreach (var row in resRows)
+                {
+                    Console.WriteLine($"{row["ProductId"]} \t\t{row["UserId"]} \t\t{row["Rating"]}  \t\t{row["Review"]}    \t{row["IsLike"]}");
+                }
+            }
+            else
+            {
+                Console.WriteLine("No Products Review Found");
             }
         }
     }
