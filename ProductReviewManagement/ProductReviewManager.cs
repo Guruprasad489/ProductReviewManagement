@@ -195,7 +195,25 @@ namespace ProductReviewManagement
                 Console.WriteLine("Products Reviews not found In The List");
                 return default;
             }
+        }
 
+        //UC9 - Method to retreive records where isLike is true
+        public static void RetreiveRecordsForIsLikeTrue(List<ProductReview> products)
+        {
+            if (products != null)
+            {
+                DataTable dataTable = CreateDataTableAndAddValues(products);
+                var resRows = from table in dataTable.AsEnumerable() where table.Field<bool>("IsLike") == true select table;
+                Console.WriteLine($"ProductId,  UserId,  Rating,  Review,  IsLike");
+                foreach (var row in resRows)
+                {
+                    Console.WriteLine($"{row["ProductId"]},  {row["UserId"]},  {row["Rating"]},  {row["Review"]},  {row["IsLike"]}");
+                }
+            }
+            else
+            {
+                Console.WriteLine("Products Review not found In The List");
+            }
         }
     }
 }
