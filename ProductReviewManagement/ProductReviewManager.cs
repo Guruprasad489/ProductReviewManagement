@@ -153,5 +153,19 @@ namespace ProductReviewManagement
                 return default;
             }
         }
+
+        //UC7 - Method to retrieve only productId and review from the list for all records using select
+        public static void RetrieveProductIdAndReviewBySelect(List<ProductReview> products)
+        {
+            if (products != null)
+            {
+                var productList = from p in products select p;
+                Console.WriteLine("\nPrinting Product Id and Product Review records by using select");
+                foreach (var product in productList)
+                    Console.WriteLine($"Product Id: {product.ProductId},  Product Reviews: {product.Review}");
+            }
+            else
+                Console.WriteLine("Products Review not found In The List");
+        }
     }
 }
