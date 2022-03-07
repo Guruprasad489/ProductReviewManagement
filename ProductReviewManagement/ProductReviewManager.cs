@@ -101,5 +101,23 @@ namespace ProductReviewManagement
                 return default;
             }
         }
+
+        //UC4 - Method to retrieve count of review by product id from the list
+        public static void RetrieveProductIdCount(List<ProductReview> products)
+        {
+            if (products != null)
+            {
+                var resProductCount = products.GroupBy(x => x.ProductId).Select(p => new { productId = p.Key, count = p.Count() });
+                Console.WriteLine("\nCount of Product Review Based On Product Id");
+                foreach (var product in resProductCount)
+                {
+                    Console.WriteLine($"Product Id : {product.productId},  Product Count : {product.count}");
+                }
+            }
+            else
+            {
+                Console.WriteLine("Products Reviews not found In The List");
+            }
+        }
     }
 }
