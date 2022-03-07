@@ -119,5 +119,22 @@ namespace ProductReviewManagement
                 Console.WriteLine("Products Reviews not found In The List");
             }
         }
+
+        //UC5 - Method to retrieve only productId and review from the list for all records
+        public static void RetrieveProductIdAndReview(List<ProductReview> products)
+        {
+            if (products != null)
+            {
+                var productList = products.Select(p => new { productId = p.ProductId, review = p.Review }).ToList();
+                foreach (var product in productList)
+                {
+                    Console.WriteLine($"Product Id : {product.productId},  Product Reviews : {product.review}");
+                }
+            }
+            else
+            {
+                Console.WriteLine("No Products Review Added In The List");
+            }
+        }
     }
 }
