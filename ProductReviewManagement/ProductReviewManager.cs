@@ -233,5 +233,24 @@ namespace ProductReviewManagement
                 Console.WriteLine("Products Review not found In The List");
             }
         }
+
+        //UC11 - Method to retreive rating contains "Nice" or "Good" in review message from datatable
+        public static void GetNiceReviewRecordsFromTable(List<ProductReview> products)
+        {
+            if (products != null)
+            {
+                DataTable dataTable = CreateDataTableAndAddValues(products);
+                var resRows = from table in dataTable.AsEnumerable() where table.Field<string>("Review").Contains("Nice") || table.Field<string>("Review").Contains("Good") select table;
+                Console.WriteLine($"ProductId,  UserId,  Rating,  Review,  IsLike");
+                foreach (var row in resRows)
+                {
+                    Console.WriteLine($"{row["ProductId"]},  {row["UserId"]},  {row["Rating"]},  {row["Review"]},  {row["IsLike"]}");
+                }
+            }
+            else
+            {
+                Console.WriteLine("No Products Review Added In The List");
+            }
+        }
     }
 }

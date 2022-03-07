@@ -22,7 +22,7 @@ namespace ProductReviewManagement
                     Console.WriteLine("\nChoose an option \n0. Exit \n1. Add Product Review To List \n2. Show All Product Reviews \n3. Retrieve Top Three Rating Records" +
                                       "\n4. retrieve records rating greater than 3 and productId 1 or 4 or 9 \n5. Count Of Reviews By ProductId \n6. Retrieve ProductId And Review" +
                                       "\n7. Skip Top Five Records \n8. Retrieve Product Id And Review By Select \n9. Create Data Table And Add Values \n10. Retreive Records where IsLike is True" +
-                                      "\n11. Find Avg Rating For Each ProductId");
+                                      "\n11. Find Avg Rating For Each ProductId \n12. Get Nice or Good Review Records From Table");
                     int option = Convert.ToInt32(Console.ReadLine());
                     switch (option)
                     {
@@ -61,6 +61,9 @@ namespace ProductReviewManagement
                             break;
                         case 11:
                             ProductReviewManager.FindAvgRatingForEachProductId(productList);
+                            break;
+                        case 12:
+                            ProductReviewManager.GetNiceReviewRecordsFromTable(productList);
                             break;
                         default:
                             Console.WriteLine("Please choose the correct option");
