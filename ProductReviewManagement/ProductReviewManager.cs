@@ -215,5 +215,23 @@ namespace ProductReviewManagement
                 Console.WriteLine("Products Review not found In The List");
             }
         }
+
+        //UC10 - Method to Find, retreive average rating for each product id
+        public static void FindAvgRatingForEachProductId(List<ProductReview> products)
+        {
+            if (products != null)
+            {
+                DataTable dataTable = CreateDataTableAndAddValues(products);
+                var resatingAverage = from product in dataTable.AsEnumerable() group product by product.Field<int>("ProductId") into temp select new { productid = temp.Key, average = Math.Round(temp.Average(x => x.Field<double>("Rating")), 3) };
+                foreach (var row in resatingAverage)
+                {
+                    Console.WriteLine("Product Id: {0} \tAverage Ratings: {1}", row.productid, row.average);
+                }
+            }
+            else
+            {
+                Console.WriteLine("Products Review not found In The List");
+            }
+        }
     }
 }
