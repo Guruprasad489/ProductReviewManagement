@@ -102,7 +102,7 @@ namespace ProductReviewManagement
             }
         }
 
-        //UC4 - Method to retrieve count of review by product id from the list
+        //UC4 - Method to retrieve count of review by product id from the list using LINQ
         public static void RetrieveProductIdCount(List<ProductReview> products)
         {
             if (products != null)
@@ -120,7 +120,7 @@ namespace ProductReviewManagement
             }
         }
 
-        //UC5 - Method to retrieve only productId and review from the list for all records
+        //UC5 - Method to retrieve only productId and review from the list for all records using LINQ
         public static void RetrieveProductIdAndReview(List<ProductReview> products)
         {
             if (products != null)
@@ -134,6 +134,23 @@ namespace ProductReviewManagement
             else
             {
                 Console.WriteLine("No Products Review Added In The List");
+            }
+        }
+
+        //UC6 - Method to skip top 5 records retrieve other records using LINQ
+        public static List<ProductReview> SkipTopFiveRecords(List<ProductReview> products)
+        {
+            if (products != null)
+            {
+                var resProductList = (from p in products orderby p.Rating descending select p).Skip(5).ToList();
+                Console.WriteLine("Printing Records By Skipping Top 5 Records");
+                IterateOverList(resProductList);
+                return resProductList;
+            }
+            else
+            {
+                Console.WriteLine("Products Reviews not found In The List");
+                return default;
             }
         }
     }

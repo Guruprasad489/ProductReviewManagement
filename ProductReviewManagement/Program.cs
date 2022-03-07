@@ -20,7 +20,8 @@ namespace ProductReviewManagement
                 while (true)
                 {
                     Console.WriteLine("\nChoose an option \n0. Exit \n1. Add Product Review To List \n2. Show All Product Reviews \n3. Retrieve Top Three Rating Records" +
-                                      "\n4. retrieve records rating greater than 3 and productId 1 or 4 or 9 \n5. Count Of Reviews By ProductId \n6. Retrieve ProductId And Review");
+                                      "\n4. retrieve records rating greater than 3 and productId 1 or 4 or 9 \n5. Count Of Reviews By ProductId \n6. Retrieve ProductId And Review" +
+                                      "\n7. Skip Top Five Records");
                     int option = Convert.ToInt32(Console.ReadLine());
                     switch (option)
                     {
@@ -44,6 +45,9 @@ namespace ProductReviewManagement
                             break;
                         case 6:
                             ProductReviewManager.RetrieveProductIdAndReview(productList);
+                            break;
+                        case 7:
+                            ProductReviewManager.SkipTopFiveRecords(productList);
                             break;
                         default:
                             Console.WriteLine("Please choose the correct option");
